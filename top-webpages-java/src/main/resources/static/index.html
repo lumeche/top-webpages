@@ -5,40 +5,45 @@
 	href="./bower_components/bootstrap-css-only/css/bootstrap.min.css" />
 </head>
 <body ng-app="myApp">
-	<div class="container" ng-controller="AppController">
+	<div class="container" ng-controller="AppController as ctr">
 		<div class="page-header">
-			<h1>Top visited pages</h1>
+			<h1>Top visited pages on week of {{ctr.date}}</h1>
 		</div>
 		<div class="alert alert-info" role="alert"
 			ng-hide="items && items.length > 0">There are no visits.</div>
 
-		<table>
-			<thead>
-				<tr>
-					<td>URL</td>
-					<td>Week</td>
-					<td>Visits</td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr class="form-group" ng-repeat="item in items">
-					<td>{{item.url}}</td>
-					<td>{{item.weekFrom}}</td>
-					<td>{{item.visits}}</td>
-				</tr>
+		<form class="form-horizontal" role="form" ng-submit="ctr.findVisit()">
+			<div class="input-group">
+				<input type="text" class="form-control" ng-model="ctr.date"
+					placeholder="2016-02-08" /> <span
+					class="input-group-btn">
+					<button class="btn btn-default" type="submit"
+						title="Refresh">
+						<span class="glyphicon glyphicon-eye-open"></span>
+					</button>
+				</span>
+			</div>
+			<table class="table">
+				<thead>
+					<tr>
+						<td>URL</td>
+						<td>Visits</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in items">
+						<td>{{item.url}}</td>						
+						<td>{{item.visits}}</td>
+					</tr>
 
-			</tbody>
-		</table>
-		<div class="page-header">
-			<h1>Created by Luis Tobon</h1>
-		</div>
+				</tbody>
+			</table>
+		</form>
 	</div>
 	<script type="text/javascript"
 		src="./bower_components/angular/angular.min.js"></script>
 	<script type="text/javascript"
 		src="./bower_components/angular-resource/angular-resource.min.js"></script>
-	<script type="text/javascript"
-		src="./bower_components/lodash/dist/lodash.min.js"></script>
 	<script type="text/javascript" src="./app/app.js"></script>
 	<script type="text/javascript" src="./app/controllers.js"></script>
 	<script type="text/javascript" src="./app/services.js"></script>
