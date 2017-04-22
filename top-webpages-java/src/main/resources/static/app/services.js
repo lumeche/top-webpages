@@ -1,10 +1,18 @@
 (function(angular) {
-	var ItemFactory = function($resource) {
+	var TopVisitsByDateFactory = function($resource) {
 		return $resource('/topVisits/:date', {
 			date : '@date'
-		}); // Note the full endpoint address
+		}); 
+	};
+	
+	var TopVisitsByUrlFactory = function($resource) {
+		return $resource('/visitByURL?url=:url', {
+			url : '@url'
+		}); 
 	}
-
-	ItemFactory.$inject = [ '$resource' ];
-	angular.module("myApp.services").factory("Item", ItemFactory);
+	
+	TopVisitsByDateFactory.$inject = [ '$resource' ];
+	TopVisitsByUrlFactory.$inject = [ '$resource' ];
+	angular.module("myApp.services").factory("TopVisitsByDate", TopVisitsByDateFactory);
+	angular.module("myApp.services").factory("TopVisitsByUrl", TopVisitsByUrlFactory);
 }(angular));

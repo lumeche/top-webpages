@@ -27,6 +27,14 @@ public class Visit {
 		this.visits = visits;
 	}
 
+	public int getVisitId() {
+		return visitId;
+	}
+
+	public void setVisitId(int visitId) {
+		this.visitId = visitId;
+	}
+
 	public String getUrl() {
 		return url;
 	}
@@ -34,7 +42,7 @@ public class Visit {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
+
 	public String getWeekFrom() {
 		return weekFrom;
 	}
@@ -51,12 +59,6 @@ public class Visit {
 		this.visits = visits;
 	}
 
-	public int getVisitId() {
-		return visitId;
-	}
-
-	public void setVisitId(int visitId) {
-		this.visitId = visitId;
-	}
+	
 
 }

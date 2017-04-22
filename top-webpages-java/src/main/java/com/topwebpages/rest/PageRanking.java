@@ -9,13 +9,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.topwebpages.data.model.Visit;
-import com.topwebpages.data.repository.VisitRepository;
 import com.topwebpages.services.VisitServices;
+
 
 @RestController
 public class PageRanking {
@@ -24,21 +26,17 @@ public class PageRanking {
 
 	@Value("${date.format}")
 	private String dateFormat;
-	
-	@Autowired
-	private VisitRepository visitRepository;
 
 	@Autowired
 	private VisitServices visitServices;
 
-	@RequestMapping("/visits")
-	public List<Visit> getAllVisits() {
-		return visitRepository.findAll();
+	@RequestMapping("/visitByURL")
+	public List<Visit> getVisitPerUrl(@RequestParam String url) {
+		List<Visit> visits = visitServices.getVisitByUrl(url);
+		logger.info("For URL {} {} visits found", url,visits.size());
+		return visits;
 	}
-	@RequestMapping("/visit/{visitId}")
-	public Visit getVisit(@PathVariable Integer visitId) {
-		return visitRepository.findOne(visitId);
-	}
+	
 	
 	@RequestMapping("/topVisits/{dateInWeek}")
 	public List<Visit> getTopVisit(@PathVariable String dateInWeek) {
@@ -51,4 +49,6 @@ public class PageRanking {
 			return null;
 		}
 	}
+	
+	
 }

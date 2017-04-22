@@ -3,6 +3,7 @@ package com.topwebpages.services;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -21,11 +22,16 @@ public class VisitServices {
 
 	Logger logger = LoggerFactory.getLogger(VisitServices.class);
 
+	
+	
 	@Value("${date.format}")
 	private String dateFormat;
 
 	@Value("${results.number}")
 	private int numResults;
+
+
+	
 	
 	@Autowired
 	private VisitRepository visitRepository;
@@ -37,6 +43,11 @@ public class VisitServices {
 		return visitRepository.findByWeekFrom(lastDayOfWeek, pageRequest);
 	}
 
+	public List<Visit> getVisitByUrl(String url){
+		List<Visit> visits = visitRepository.findByUrl(url);
+		return visits;
+	}
+	
 	private String getLastDayWeek(Date dayInWeek) {
 		Calendar c = Calendar.getInstance();
 		c.setTime(dayInWeek);

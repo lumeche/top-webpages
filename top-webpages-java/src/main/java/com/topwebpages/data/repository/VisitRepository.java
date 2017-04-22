@@ -9,4 +9,5 @@ import com.topwebpages.data.model.Visit;
 
 public interface VisitRepository extends JpaRepository<Visit, Integer>{
 	public List<Visit> findByWeekFrom(String weekFrom,Pageable pageable);
+	public List<Visit> findByUrl(String url);
 }

@@ -1,5 +1,6 @@
 package com.topwebpages.services;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
@@ -84,7 +85,19 @@ public class VisitServicesTest {
 		assertEquals(obtained.get(0).getWeekFrom(), lastDayWeekStr);			
 	}
 	
-	
+	@Test
+	public void testGetVisitsByUrl(){
+		//given
+		visits=new ArrayList<>(Collections.singleton(new Visit(1,"xxx.com","2016-05-08",1155)));		
+		//when
+		when(visitRepository.findByUrl(matches("xxx.com"))).thenReturn(visits);
+		List<Visit> positive = testee.getVisitByUrl("xxx.com");
+		List<Visit> negative = testee.getVisitByUrl("yyyy");
+		//then
+		assertEquals(1,positive.size());
+		assertEquals("xxx.com", positive.get(0).getUrl());
+		assertEquals(0, negative.size());
+	}
 
 	private Date getDate(int year,int month,int day) {
 		Calendar calendar=Calendar.getInstance();
