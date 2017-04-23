@@ -12,7 +12,7 @@
 					<small>Top visited pages on week of </small>{{ctr.date}}
 				</h1>
 				<h1 ng-hide="ctr.shown=='date'">
-					<small>Top visited pages on for   </small>{{ctr.page}}
+					<small>Top visited pages on for </small>{{ctr.page}}
 				</h1>
 			</div>
 			<div class="alert alert-info" role="alert"
@@ -42,12 +42,14 @@
 					<thead>
 						<tr>
 							<td>URL</td>
+							<td ng-hide="ctr.shown=='date'">Week</td>
 							<td>Visits</td>
 						</tr>
 					</thead>
 					<tbody>
 						<tr ng-repeat="item in items">
 							<td>{{item.url}}</td>
+							<td ng-hide="ctr.shown=='date'">{{item.weekFrom}}</td>
 							<td>{{item.visits}}</td>
 						</tr>
 
