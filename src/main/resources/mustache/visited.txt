@@ -1,0 +1,5 @@
+All the Visits registered here.....
+URL|Week|Visits
+{{#visits}}
+{{url}}|{{weekFrom}}|{{visits}}
+{{/visits}}
